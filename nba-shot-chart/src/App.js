@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import ShotChart from './components/ShotChart';
 
 function App() {
+  const [playerName, setPlayerName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handlePlayerSelect = (name) => {
+    setPlayerName(name);
+    fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.image_url) {
+          setImageUrl(data.image_url);
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('Error fetching shot chart.');
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex flex-col items-center">
+      <h1 className="text-3xl font-bold mt-8">NBA Shot Chart</h1>
+      <SearchBar onPlayerSelect={handlePlayerSelect} />
+      {imageUrl && <ShotChart imageUrl={imageUrl} playerName={playerName} />}
     </div>
   );
 }
