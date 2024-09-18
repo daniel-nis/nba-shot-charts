@@ -8,6 +8,7 @@ function App() {
   const [playerName, setPlayerName] = useState('');
   const [imageBase64, setImageBase64] = useState('');
   const [statistics, setStatistics] = useState(null);
+  const [favoriteShots, setFavoriteShots] = useState(null);
 
   const handlePlayerSelect = (name) => {
     setPlayerName(name);
@@ -21,9 +22,10 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        if (data.image_base64 && data.statistics) {
+        if (data.image_base64 && data.statistics && data.favorite_shots) {
           setImageBase64(data.image_base64);
           setStatistics(data.statistics);
+          setFavoriteShots(data.favorite_shots);
         } else {
           alert(data.error);
         }
@@ -38,13 +40,17 @@ function App() {
     <div className="min-h-screen flex flex-col items-center">
       <h1 className="text-4xl font-bold mt-8">NBA Shot Chart</h1>
       <SearchBar onPlayerSelect={handlePlayerSelect} />
-      {imageBase64 && statistics && (
+      {imageBase64 && statistics && favoriteShots && (
         <ShotChart
           imageBase64={imageBase64}
           playerName={playerName}
           statistics={statistics}
+          favoriteShots={favoriteShots}
         />
       )}
+      <footer className="p-12 mt-auto text-center text-gray-500 text-sm pb-4">
+        <p>2023-2024 NBA Shot Chart. Not affiliated with the NBA.</p>
+      </footer>
     </div>
   );
 }

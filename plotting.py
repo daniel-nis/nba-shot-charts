@@ -127,10 +127,8 @@ class ShotChart:
         # Close the figure to free up memory
         plt.close(fig)'''
 
-# plotting.py
-
 import matplotlib
-matplotlib.use('Agg')  # Use a non-interactive backend suitable for server environments
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Rectangle, Arc
 import matplotlib.font_manager as font_manager

@@ -66,11 +66,14 @@ def get_shot_chart():
             'two_point_percentage': stats.two_point_percentage,
             'average_shot_distance': stats.average_shot_distance,
             'clutch_attempts': stats.clutch_attempts,
-            'clutch_percentage': stats.clutch_percentage,
+            'clutch_fg_percentage': stats.clutch_fg_percentage,
+            'games_played': stats.games_played,
         }
 
+        favorite_shots_data = stats.favorite_shots.to_dict()
+
         # Return the base64 image data
-        return jsonify({'image_base64': image_base64, 'statistics': stats_data})
+        return jsonify({'image_base64': image_base64, 'statistics': stats_data, 'favorite_shots': favorite_shots_data})
 
     except ValueError as e:
         return jsonify({'error': str(e)}), 404
