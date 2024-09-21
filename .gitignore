@@ -1,4 +1,5 @@
 shot-charts-venv/
-chart-notebook.ipynb
+charts-notebook.ipynb
 download_nba_shot_data.py
 main.py
+__pycache__/
