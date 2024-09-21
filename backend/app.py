@@ -3,8 +3,10 @@ from models import Database, Player, ShotData, Statistics
 from plotting import ShotChart
 from team_colors import team_colors
 import os
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='static')
+CORS(app)
 
 # Ensure the static directory exists
 os.makedirs('static', exist_ok=True)

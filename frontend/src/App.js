@@ -1,8 +1,8 @@
-// src/App.js
-
 import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ShotChart from './components/ShotChart';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
   const [playerName, setPlayerName] = useState('');
@@ -12,7 +12,7 @@ function App() {
 
   const handlePlayerSelect = (name) => {
     setPlayerName(name);
-    fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
+    fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`)
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {

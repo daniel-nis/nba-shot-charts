@@ -7,9 +7,11 @@ function SearchBar({ onPlayerSelect }) {
   const suggestionBoxRef = useRef();
   const inputRef = useRef();
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     if (query.length > 0) {
-      fetch(`/api/players?q=${encodeURIComponent(query)}`)
+      fetch(`${API_BASE_URL}/api/players?q=${encodeURIComponent(query)}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
