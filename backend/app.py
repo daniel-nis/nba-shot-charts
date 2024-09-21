@@ -88,5 +88,9 @@ def get_shot_chart():
 def static_files(filename):
     return send_from_directory('static', filename)
 
+@app.route('/ping')
+def ping():
+    return 'OK', 200
+
 if __name__ == '__main__':
     app.run(debug=True)
