@@ -1,0 +1,55 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install
+      - name: Build
+        working-directory: frontend
+        run: npm run build
+      # Add any frontend tests here
+
+  build-and-test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      # Add any backend tests here
+
+  deploy:
+    needs: [build-and-test-frontend, build-and-test-backend]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Frontend to Render
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL_FRONTEND }}
+        run: curl "$deploy_url"
+      - name: Deploy Backend to Render
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL_BACKEND }}
+        run: curl "$deploy_url"
