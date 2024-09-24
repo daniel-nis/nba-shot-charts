@@ -35,7 +35,7 @@ function SearchBar({ onPlayerSelect }) {
       setSuggestions([]);
       setShowSuggestions(false);
     }
-  }, [query]);
+  }, [query, API_BASE_URL]);
 
   // Close suggestions when clicking outside or on the input
   useEffect(() => {
