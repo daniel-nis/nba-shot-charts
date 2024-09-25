@@ -68,7 +68,7 @@ function SearchBar({ onPlayerSelect }) {
       <input
         ref={inputRef}
         type="text"
-        className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 border border-white"
+        className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-1 focus:ring-stone-50 border border-white"
         placeholder="Search for a player..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}

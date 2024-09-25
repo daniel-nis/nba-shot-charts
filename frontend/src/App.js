@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ShotChart from './components/ShotChart';
+import LoadingSkeleton from './components/LoadingSkeleton';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -9,9 +10,11 @@ function App() {
   const [imageBase64, setImageBase64] = useState('');
   const [statistics, setStatistics] = useState(null);
   const [favoriteShots, setFavoriteShots] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handlePlayerSelect = (name) => {
     setPlayerName(name);
+    setLoading(true);
     fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`)
       .then((res) => {
         if (!res.ok) {
@@ -22,6 +25,7 @@ function App() {
         return res.json();
       })
       .then((data) => {
+        setLoading(false);
         if (data.image_base64 && data.statistics && data.favorite_shots) {
           setImageBase64(data.image_base64);
           setStatistics(data.statistics);
@@ -31,6 +35,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.error('Fetch error:', err);
         alert('Error fetching shot chart.');
       });
@@ -40,13 +45,17 @@ function App() {
     <div className="min-h-screen flex flex-col items-center">
       <h1 className="text-4xl font-bold mt-8">NBA Shot Chart</h1>
       <SearchBar onPlayerSelect={handlePlayerSelect} />
-      {imageBase64 && statistics && favoriteShots && (
-        <ShotChart
-          imageBase64={imageBase64}
-          playerName={playerName}
-          statistics={statistics}
-          favoriteShots={favoriteShots}
-        />
+      {loading ? (
+        <LoadingSkeleton />
+      ) : (
+        imageBase64 && statistics && favoriteShots && (
+          <ShotChart
+            imageBase64={imageBase64}
+            playerName={playerName}
+            statistics={statistics}
+            favoriteShots={favoriteShots}
+          />
+        )
       )}
       <footer className="p-12 mt-auto text-center text-gray-500 text-sm pb-4">
         <p>2023-2024 NBA Shot Chart. Not affiliated with the NBA.</p>
