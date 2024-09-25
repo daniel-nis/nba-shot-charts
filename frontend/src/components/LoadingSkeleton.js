@@ -4,8 +4,9 @@ const LoadingSkeleton = () => {
     return (
       <div className="mt-6 w-full max-w-6xl px-4 animate-pulse">
         {/* Title */}
-        <h2 className="text-3xl font-bold text-center mb-6 h-10 bg-gray-300 rounded"></h2>
-  
+        <h2 className="text-3xl font-bold text-center mb-6 h-10 bg-gray-300 rounded">
+            <span className="sr-only">Loading player shot chart...</span>
+        </h2> 
         <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-6">
           {/* Larger Shot Chart Image Placeholder */}
           <div className="w-full md:w-2/3">
@@ -16,7 +17,9 @@ const LoadingSkeleton = () => {
           <div className="w-full md:w-1/3 mt-6 md:mt-0">
             {/* Statistics */}
             <div className="p-6 pt-2 pb-2">
-              <h3 className="text-2xl font-semibold mb-4 text-center h-8 bg-gray-300 rounded"></h3>
+              <h3 className="text-2xl font-semibold mb-4 text-center h-8 bg-gray-300 rounded">
+                <span className="sr-only">Loading player statistics...</span>
+              </h3>
               <ul className="space-y-2">
                 {/* Create placeholders for each stat */}
                 {Array(8).fill().map((_, index) => (
@@ -30,7 +33,9 @@ const LoadingSkeleton = () => {
   
             {/* Favorite Shots */}
             <div className="p-6 rounded-lg">
-              <h3 className="text-2xl font-semibold mb-4 text-center h-8 bg-gray-300 rounded"></h3>
+              <h3 className="text-2xl font-semibold mb-4 text-center h-8 bg-gray-300 rounded">
+                <span className="sr-only">Loading favorite shots...</span>
+              </h3>
               <ul className="space-y-2">
                 {/* Create placeholders for each favorite shot */}
                 {Array(5).fill().map((_, index) => (
