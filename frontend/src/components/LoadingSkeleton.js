@@ -38,7 +38,7 @@ const LoadingSkeleton = () => {
               </h3>
               <ul className="space-y-2">
                 {/* Create placeholders for each favorite shot */}
-                {Array(5).fill().map((_, index) => (
+                {Array(4).fill().map((_, index) => (
                   <li
                     key={index}
                     className="flex justify-between bg-gray-300 h-8 rounded p-2"

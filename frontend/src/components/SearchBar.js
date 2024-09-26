@@ -11,6 +11,7 @@ function SearchBar({ onPlayerSelect }) {
 
   useEffect(() => {
     if (query.length > 0) {
+      //fetch(`/api/players?q=${encodeURIComponent(query)}`) // todo: before pushing, add this back
       fetch(`${API_BASE_URL}/api/players?q=${encodeURIComponent(query)}`)
         .then((res) => {
           if (!res.ok) {
