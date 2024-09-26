@@ -3,7 +3,7 @@
 team_colors = {
     "Atlanta Hawks": "#E03A3E",
     "Boston Celtics": "#007A33",
-    "Brooklyn Nets": "#000000",
+    "Brooklyn Nets": "#FFFFFF",
     "Charlotte Hornets": "#1D1160",
     "Chicago Bulls": "#CE1141",
     "Cleveland Cavaliers": "#860038",
