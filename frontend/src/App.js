@@ -16,8 +16,8 @@ function App() {
   const handlePlayerSelect = (name) => {
     setPlayerName(name);
     setLoading(true);
-    fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
-    // fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`) // todo: before pushing, add this back
+    //fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
+    fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`)
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
