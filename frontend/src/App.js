@@ -10,13 +10,14 @@ function App() {
   const [imageBase64, setImageBase64] = useState('');
   const [statistics, setStatistics] = useState(null);
   const [favoriteShots, setFavoriteShots] = useState(null);
+  const [teamColor, setTeamColor] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handlePlayerSelect = (name) => {
     setPlayerName(name);
     setLoading(true);
-    //fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
-    fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`) // todo: before pushing, add this back
+    fetch(`/api/shot_chart?player_name=${encodeURIComponent(name)}`)
+    // fetch(`${API_BASE_URL}/api/shot_chart?player_name=${encodeURIComponent(name)}`) // todo: before pushing, add this back
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
@@ -27,10 +28,11 @@ function App() {
       })
       .then((data) => {
         setLoading(false);
-        if (data.image_base64 && data.statistics && data.favorite_shots) {
+        if (data.image_base64 && data.statistics && data.favorite_shots && data.team_color) {
           setImageBase64(data.image_base64);
           setStatistics(data.statistics);
           setFavoriteShots(data.favorite_shots);
+          setTeamColor(data.team_color);
         } else {
           alert(data.error);
         }
@@ -55,11 +57,25 @@ function App() {
             playerName={playerName}
             statistics={statistics}
             favoriteShots={favoriteShots}
+            teamColor={teamColor}
           />
         )
       )}
+      {/* <footer className="p-12 mt-auto text-center text-gray-500 text-sm pb-4">
+        <p>2023-2024 NBA Shot Chart. Not affiliated with the NBA.</p>
+      </footer> */}
       <footer className="p-12 mt-auto text-center text-gray-500 text-sm pb-4">
         <p>2023-2024 NBA Shot Chart. Not affiliated with the NBA.</p>
+        <p>
+          Made by 
+          <a 
+            href="https://twitter.com/dotproductt" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-blue-500 hover:underline"
+          > @dotproductt
+          </a>
+        </p>
       </footer>
     </div>
   );

@@ -57,6 +57,7 @@ def get_shot_chart():
 
         # Create the shot chart and get the base64 image
         shot_chart = ShotChart(shot_df, player_name, player.team_name, team_colors, stats)
+        team_color = shot_chart.get_team_color()
         image_base64 = shot_chart.plot_shot_chart()
 
         stats_data = {
@@ -75,7 +76,7 @@ def get_shot_chart():
         favorite_shots_data = stats.favorite_shots.to_dict()
 
         # Return the base64 image data
-        return jsonify({'image_base64': image_base64, 'statistics': stats_data, 'favorite_shots': favorite_shots_data})
+        return jsonify({'image_base64': image_base64, 'statistics': stats_data, 'favorite_shots': favorite_shots_data, 'team_color': team_color})
 
     except ValueError as e:
         return jsonify({'error': str(e)}), 404

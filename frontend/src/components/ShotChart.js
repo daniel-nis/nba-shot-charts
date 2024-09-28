@@ -1,15 +1,15 @@
 import React from 'react';
 
-function Statistic({ label, value }) {
+function Statistic({ label, value, teamColor }) {
   return (
     <div className="text-center mb-8">
       <span className="text-l font-bold text-white">{label}</span>
-      <p className="text-xl font-bold text-white tracking-wide">{value}</p>
+      <p className="text-xl font-bold tracking-wide" style={{ color: teamColor }}>{value}</p>
     </div>
   );
 }
 
-function ShotChart({ imageBase64, playerName, statistics, favoriteShots }) {
+function ShotChart({ imageBase64, playerName, statistics, favoriteShots, teamColor }) {
   const imageUrl = `data:image/png;base64,${imageBase64}`;
 
   return (
@@ -22,14 +22,14 @@ function ShotChart({ imageBase64, playerName, statistics, favoriteShots }) {
       </div>
       {/* Statistics section */}
       <div className="pt-10 p-6 grid grid-cols-1 md:grid-cols-3 justify-items-center md:max-w-[85%] mx-auto">
-        <Statistic label="Total FG" value={statistics.total_shots} />
-        <Statistic label="FG%" value={`${(statistics.total_make_percentage * 100).toFixed(1)}`} />
-        <Statistic label="Avg. Shot Distance" value={`${statistics.average_shot_distance.toFixed(1)} ft`} />
+        <Statistic label="Total FG" value={statistics.total_shots} teamColor={teamColor} />
+        <Statistic label="FG%" value={`${(statistics.total_make_percentage * 100).toFixed(1)}`} teamColor={teamColor} />
+        <Statistic label="Avg. Shot Distance" value={`${statistics.average_shot_distance.toFixed(1)} ft`} teamColor={teamColor} />
         {/* <Statistic label="3-Point Attempts" value={statistics.three_point_attempts} /> */}
-        <Statistic label="3-Point Percentage" value={`${(statistics.three_point_percentage * 100).toFixed(1)}%`} />
+        <Statistic label="3-Point Percentage" value={`${(statistics.three_point_percentage * 100).toFixed(1)}%`} teamColor={teamColor} />
         {/* <Statistic label="2-Point Attempts" value={statistics.two_point_attempts } /> */}
-        <Statistic label="2-Point Percentage" value={`${(statistics.two_point_percentage * 100).toFixed(1)}%`} />
-        <Statistic label="Clutch FG Percentage" value={`${(statistics.clutch_fg_percentage * 100).toFixed(1)}%`} />
+        <Statistic label="2-Point Percentage" value={`${(statistics.two_point_percentage * 100).toFixed(1)}%`} teamColor={teamColor} />
+        <Statistic label="Clutch FG Percentage" value={`${(statistics.clutch_fg_percentage * 100).toFixed(1)}%`} teamColor={teamColor} />
       </div>
     </div>
     
