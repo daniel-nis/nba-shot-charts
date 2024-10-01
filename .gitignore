@@ -3,3 +3,5 @@ charts-notebook.ipynb
 download_nba_shot_data.py
 main.py
 __pycache__/
+backend/__pycache__/
+backend/db_test.py
