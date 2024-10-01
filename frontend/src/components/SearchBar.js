@@ -11,8 +11,8 @@ function SearchBar({ onPlayerSelect }) {
 
   useEffect(() => {
     if (query.length > 0) {
-      // fetch(`/api/players?q=${encodeURIComponent(query)}`)
-      fetch(`${API_BASE_URL}/api/players?q=${encodeURIComponent(query)}`)
+      fetch(`/api/players?q=${encodeURIComponent(query)}`)
+      // fetch(`${API_BASE_URL}/api/players?q=${encodeURIComponent(query)}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -59,9 +59,13 @@ function SearchBar({ onPlayerSelect }) {
   }, []);
 
   const handleSelect = (name) => {
-    setQuery(name);
+    setQuery('');
     setShowSuggestions(false);
     onPlayerSelect(name);
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
   };
 
   return (

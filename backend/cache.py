@@ -10,6 +10,11 @@ CACHE_CAPACITY = 100  # Set cache capacity based on limitations
 
 # Ensure the cache database file exists
 def initialize_cache_db():
+    clear_cache = os.environ.get('CLEAR_CACHE', 'False').lower() == 'true'
+    if clear_cache and os.path.exists(CACHE_DB):
+        os.remove(CACHE_DB)
+        print("Cache cleared.")
+
     if not os.path.exists(CACHE_DB):
         conn = sqlite3.connect(CACHE_DB)
         cursor = conn.cursor()

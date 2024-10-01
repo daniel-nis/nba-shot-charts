@@ -14,7 +14,7 @@ function ShotChart({ imageBase64, playerName, statistics, favoriteShots, teamCol
 
   return (
     <div className="mt-6 w-full max-w-screen-xl xl:max-w-6xl 2xl:max-w-screen-2xl px-4">
-      <h2 className="text-3xl font-bold text-center mb-6">{playerName}'s Shot Chart</h2>
+      <h2 className="text-xl md:text-3xl font-bold text-center mb-6">{playerName}'s Shot Chart</h2>
       <div className="flex flex-col md:flex-row justify-center items-center md:items-start md:space-x-6">
         <div className="w-full md:w-2/3">
           <img src={imageUrl} alt="Shot Chart" className="w-full h-auto" />
