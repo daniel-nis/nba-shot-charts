@@ -36,6 +36,15 @@ function App() {
         } else {
           alert(data.error);
         }
+        if (window.gtag) {
+          window.gtag('event', 'shot_chart_generated', {
+            event_category: 'Shot Charts',
+            event_label: name,
+            value: 1,
+          });
+        } else {
+          console.warn('Google Analytics not loaded');
+        }
       })
       .catch((err) => {
         setLoading(false);
